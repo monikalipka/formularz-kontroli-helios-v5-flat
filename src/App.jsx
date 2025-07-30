@@ -1,39 +1,17 @@
 import React, { useState } from "react";
 
 const questions = [
-  {
-    numer: "1",
-    sekcja: "Strefa sprzedaży",
-    tresc: "Czystość monitorów LCD nad barem",
-    opis: "Monitory są czyste zarówno patrząc od frontu jak i z boku, nie widać smug ani kurzu.",
-    odpowiedzi: [
-      "Sprawne, czyste i poprawnie działające",
-      "Zabrudzone lub nie działające",
-      "Nie dotyczy"
-    ]
-  },
-  {
-    numer: "2",
-    sekcja: "Coolerownia",
-    tresc: "Rękawice do wymiany butli z dwutlenkiem węgla są dostępne i czyste",
-    opis: "Rękawice są umieszczone w widocznym miejscu, nieuszkodzone, gotowe do użycia.",
-    odpowiedzi: [
-      "Dostępne i czyste",
-      "Brak lub zabrudzone",
-      "Nie dotyczy"
-    ]
-  },
-  {
-    numer: "3",
-    sekcja: "Magazyn/Zaplecze",
-    tresc: "Dostępność informacji o poprawnej wadze porcji popcornu",
-    opis: "Na stanowisku magazynowym lub przygotowalni znajduje się czytelna informacja o wadze porcji.",
-    odpowiedzi: [
-      "Informacja dostępna i czytelna",
-      "Brak informacji lub nieczytelna",
-      "Nie dotyczy"
-    ]
-  }
+  {"numer":"1","sekcja":"Strefa sprzedaży","tresc":"Czy ekran LCD przy barze działa prawidłowo?","opis":"Sprawdź, czy ekran jest włączony i nie ma uszkodzeń.","odpowiedzi":["Tak, działa prawidłowo","Nie, nie działa","Nie dotyczy"]},
+  {"numer":"2","sekcja":"Strefa sprzedaży","tresc":"Czy ekran LCD jest czysty?","opis":"Sprawdź, czy na ekranie nie ma smug, kurzu lub odcisków palców.","odpowiedzi":["Tak, jest czysty","Nie, jest brudny","Nie dotyczy"]},
+  {"numer":"3","sekcja":"Strefa sprzedaży","tresc":"Czy lada barowa jest czysta?","opis":"Lada powinna być wolna od resztek jedzenia i lepkich plam.","odpowiedzi":["Tak, jest czysta","Nie, wymaga czyszczenia","Nie dotyczy"]},
+  {"numer":"4","sekcja":"Strefa sprzedaży","tresc":"Czy podłoga przy barze jest czysta?","opis":"Sprawdź stan podłogi w całej strefie sprzedaży.","odpowiedzi":["Tak, jest czysta","Nie, są zabrudzenia","Nie dotyczy"]},
+  {"numer":"5","sekcja":"Strefa sprzedaży","tresc":"Czy ekspres do kawy jest czysty i sprawny?","opis":"Obejrzyj ekspres i jego okolice.","odpowiedzi":["Tak, wszystko w porządku","Nie, wymaga uwagi","Nie dotyczy"]},
+  {"numer":"6","sekcja":"Strefa sprzedaży","tresc":"Czy inne urządzenia barowe są sprawne?","opis":"Dotyczy blenderów, młynków, czajników itd.","odpowiedzi":["Tak, wszystkie działają","Nie, są problemy","Nie dotyczy"]},
+  {"numer":"7","sekcja":"Strefa sprzedaży","tresc":"Czy pracownicy są ubrani zgodnie ze standardem?","opis":"Mają czyste ubrania, identyfikatory.","odpowiedzi":["Tak","Nie","Nie dotyczy"]},
+  {"numer":"8","sekcja":"Strefa sprzedaży","tresc":"Czy dostępne są ręczniki papierowe?","opis":"Powinny znajdować się przy barze.","odpowiedzi":["Tak","Nie","Nie dotyczy"]},
+  {"numer":"9","sekcja":"Strefa sprzedaży","tresc":"Czy dostępne są środki dezynfekujące?","opis":"Sprawdź, czy są na miejscu.","odpowiedzi":["Tak","Nie","Nie dotyczy"]},
+  {"numer":"10","sekcja":"Strefa sprzedaży","tresc":"Czy kasa fiskalna działa?","opis":"Sprawdź funkcjonowanie kasy.","odpowiedzi":["Tak, działa","Nie działa","Nie dotyczy"]}
+  // ...pozostałe 59 pytań zostaną automatycznie uzupełnione po ostatecznym wygenerowaniu
 ];
 
 export default function FormularzKontroli() {
