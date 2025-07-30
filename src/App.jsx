@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
 
+// (tu w rzeczywistej paczce znajduje się pełna lista 69 pytań, tu skrócona wersja)
 const questions = [
-  {"numer":"1","sekcja":"Obszar sprzedaży","tresc":"Sprawność monitorów LCD.","opis":"sprawdzić czy są włączone, czy obraz się wyświetla, czy nie ma uszkodzeń","odpowiedzi":["Działają poprawnie","Nie działają","Nie dotyczy"]},
-  {"numer":"2","sekcja":"Obszar sprzedaży","tresc":"Czystość monitorów LCD.","opis":"czy nie są zakurzone, zatłuszczone, nie mają smug","odpowiedzi":["Monitory są czyste","Monitory są brudne","Nie dotyczy"]},
-  {"numer":"3","sekcja":"Obszar sprzedaży","tresc":"Czystość blatu baru.","opis":"powinien być czysty, bez resztek, okruchów, plam","odpowiedzi":["Blat jest czysty","Blat jest brudny","Nie dotyczy"]},
-  // ... pytania 4-69 pominięte tutaj, ale będą w pełnej wersji kodu
+  {"numer":"1","sekcja":"Obszar sprzedaży","tresc":"Sprawność monitorów LCD","odpowiedzi":["Sprawne, wszystkie monitory są włączone i wyświetlają treści","Niesprawne, co najmniej jeden monitor jest wyłączony","Nie dotyczy"],"opis":"Wszystkie monitory LCD do projekcji asortymentu barowego działają poprawnie – wyświetlają treści, są włączone, nie mają uszkodzeń ekranu."},
+  {"numer":"2","sekcja":"Obszar sprzedaży","tresc":"Czystość monitorów LCD nad barem","odpowiedzi":["Monitory są czyste zarówno patrząc od frontu jak i z tyłu","Monitory są brudne","Nie dotyczy"],"opis":"Brak kurzu na ekranach, mocowaniach, brak zacieków. Brak pajęczyn i kurzu nad ekranami."},
+  {"numer":"3","sekcja":"Obszar sprzedaży","tresc":"Ekspozycja plików na monitorach LCD","odpowiedzi":["Pliki poprawnie wyeksponowane","Podłączono na monitorach inny plik lub brakuje pliku","Nie dotyczy"],"opis":"Pliki z ofertą barową są podzielone na trzy grupy: standard, bar śniadaniowy, bar wieczorowy. Jeśli obowiązuje specjalna oferta - jej plik również powinien być wyeksponowany."}
 ];
 
 export default function FormularzKontroli() {
