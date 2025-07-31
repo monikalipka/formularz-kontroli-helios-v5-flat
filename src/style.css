@@ -1,6 +1,10 @@
 body {
-  font-family: sans-serif;
-  background: #f4f4f4;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
   margin: 0;
   padding: 0;
+}
+
+input[type="radio"] {
+  accent-color: #002C5F;
 }
