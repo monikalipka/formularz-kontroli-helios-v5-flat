@@ -1,30 +1,7 @@
 import React, { useState } from "react";
-
-const questions = [
-  {
-    "numer": "1",
-    "sekcja": "Obszar sprzedaży",
-    "tresc": "Sprawność monitorów LCD.",
-    "odpowiedzi": [
-      "Sprawne, wszystkie monitory są włączone i wyświetlają treści",
-      "Niesprawne, co najmniej jeden monitor jest wyłączony",
-      "Nie dotyczy"
-    ],
-    "opis": "Wszystkie monitory LCD do projekcji asortymentu barowego działają poprawnie i są włączone. Ekspozycje plików na LCD asortymentem barowym to podstawowa forma komunikacji z klientem. Wszelkie usterki monitorów należy zgłaszać bezzwłocznie do działu IT (dw dział GA)."
-  },
-  {
-    "numer": "2",
-    "sekcja": "Obszar sprzedaży",
-    "tresc": "Czystość monitorów lcd nad barem.",
-    "odpowiedzi": [
-      "Monitory są czyste zarówno patrząc od frontu jak i z tyłu",
-      "Monitory są brudne",
-      "Nie dotyczy"
-    ],
-    "opis": "Jeżeli stwierdzi się: brak kurzu na ekranach, brak kurzu na mocowaniach, brak zacieków i śladów palców na ekranach należy wybrać TAK. Bary kinowe są miejscem pierwszego kontaktu klienta z kinem i ich wygląd wpływa na odbiór całego obiektu."
-  }
-  // ...pozostałe 67 pytań
-];
+import questions from "./questions";
+import exportToPDF from "./exportPDF";
+import "./style.css";
 
 export default function FormularzKontroli() {
   const [answers, setAnswers] = useState({});
@@ -41,7 +18,6 @@ export default function FormularzKontroli() {
   const calculateResult = () => {
     let total = 0;
     let max = 0;
-
     questions.forEach((q) => {
       const answer = answers[q.numer]?.odpowiedz;
       if (answer === q.odpowiedzi[0]) {
@@ -51,69 +27,54 @@ export default function FormularzKontroli() {
         max += 1;
       }
     });
-
     const percentage = max > 0 ? ((total / max) * 100).toFixed(2) : "0.00";
     setSummary({ total, max, percentage });
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white">
-      <div className="flex items-center justify-between mb-6">
-        <img src="/logo.png" alt="Logo Helios" width={180} height={60} />
-        <h1 className="text-3xl font-bold text-[#002C5F]">Formularz kontroli - Bar</h1>
-      </div>
+    <div className="container">
+      <header>
+        <img src="./logo.png" alt="Logo Helios" className="logo" />
+        <h1>Formularz kontroli - Bar</h1>
+      </header>
 
       {questions.map((q, index) => (
-        <div key={q.numer} className="mb-8 border p-4 rounded border-[#002C5F] bg-white shadow">
+        <div key={q.numer} className="question-block">
           {(index === 0 || questions[index - 1].sekcja !== q.sekcja) && (
-            <h2 className="text-xl font-bold text-[#002C5F] mb-2">{q.sekcja}</h2>
+            <h2 className="section-title">{q.sekcja}</h2>
           )}
-
-          <div className="space-y-4">
-            <div>
-              <p className="font-semibold text-[#002C5F]">
-                {q.numer}. {q.tresc}
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              {q.odpowiedzi.map((opt, idx) => (
-                <label key={idx} className="flex items-start space-x-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name={`q-${q.numer}`}
-                    value={opt}
-                    checked={answers[q.numer]?.odpowiedz === opt}
-                    onChange={() => handleAnswer(q.numer, opt)}
-                    className="accent-[#002C5F] mt-1"
-                  />
-                  <span className="text-sm">{opt}</span>
-                </label>
-              ))}
-            </div>
-
-            <p className="text-sm text-gray-600 italic">{q.opis}</p>
-
-            <textarea
-              placeholder="Komentarz (opcjonalny)"
-              value={answers[q.numer]?.komentarz || ""}
-              onChange={(e) => handleComment(q.numer, e.target.value)}
-              className="w-full p-2 border rounded"
-            />
+          <p className="question-text">
+            {q.numer}. {q.tresc}
+          </p>
+          <div className="options">
+            {q.odpowiedzi.map((opt, idx) => (
+              <label key={idx} className={`option option-${idx}`}>
+                <input
+                  type="radio"
+                  name={`q-${q.numer}`}
+                  value={opt}
+                  checked={answers[q.numer]?.odpowiedz === opt}
+                  onChange={() => handleAnswer(q.numer, opt)}
+                />
+                {opt}
+              </label>
+            ))}
           </div>
+          <p className="description">{q.opis}</p>
+          <textarea
+            placeholder="Komentarz (opcjonalny)"
+            value={answers[q.numer]?.komentarz || ""}
+            onChange={(e) => handleComment(q.numer, e.target.value)}
+          />
         </div>
       ))}
 
-      <button
-        className="bg-[#E30613] hover:bg-red-700 text-white py-2 px-4 rounded mt-4"
-        onClick={calculateResult}
-      >
-        Zakończ kontrolę
-      </button>
+      <button onClick={calculateResult}>Zakończ kontrolę</button>
+      <button onClick={() => exportToPDF(questions, answers, summary)}>Eksport do PDF</button>
 
       {summary && (
-        <div className="mt-6 p-4 border rounded bg-gray-100">
-          <h2 className="text-xl font-semibold text-[#002C5F] mb-2">Wynik kontroli</h2>
+        <div className="summary">
+          <h2>Wynik kontroli</h2>
           <p>Poprawnych odpowiedzi: {summary.total} z {summary.max}</p>
           <p>Wynik procentowy: {summary.percentage}%</p>
         </div>
